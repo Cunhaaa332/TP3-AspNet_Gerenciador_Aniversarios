@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TP3_ASPNet.Models.PessoaModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Bem vindo ao seu Gerenciador de Aniversarios!</h1>
+<form asp-action="Buscar">
+    <h3>Buscar pessoa</h3>
+    <div>
+        <input type="text" name="Nome" placeholder="Insira um nome" style="width:50%;" required />
+        <input type="submit" value="Buscar" class="btn btn-primary" />
+    </div>
+</form>
+<p>
+    <a asp-action="Criar">Criar nova pessoa</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Sobrenome
+            </th>
+            <th>
+                Data de Nascimento
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SobreNome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.birth)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
+                @Html.ActionLink("Detalhes", "DetalhesPessoa", new { id = item.Id }) |
+                @Html.ActionLink("Deletar", "Deletar", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
