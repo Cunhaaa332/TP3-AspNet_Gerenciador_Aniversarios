@@ -228,3 +228,11 @@ C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNe
 C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\obj\Debug\netcoreapp3.1\TP3-ASPNet.dll
 C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\obj\Debug\netcoreapp3.1\TP3-ASPNet.pdb
 C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\obj\Debug\netcoreapp3.1\TP3-ASPNet.genruntimeconfig.cache
+C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\obj\Debug\netcoreapp3.1\TP3-ASPNet.csproj.CoreCompileInputs.cache
+C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\obj\Debug\netcoreapp3.1\TP3-ASPNet.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Gabriel Cunha\Desktop\Programas c#\TP3 Gabriel Cunha - AspNet\TP3-ASPNet\TP3-ASPNet\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

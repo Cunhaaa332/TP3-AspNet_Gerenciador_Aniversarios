@@ -4,26 +4,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TP3_ASPNet.Dados;
 using TP3_ASPNet.Models;
+using TP3_ASPNet.Repositorio;
 
 namespace TP3_ASPNet.Controllers
 {
     public class PessoaController : Controller
     {
+        private RepositorioPessoa RepositorioPessoa { get; set; }
 
+        public PessoaController(RepositorioPessoa repositorioPessoa) {
+            this.RepositorioPessoa = repositorioPessoa;
+        }
         // GET: Pessoa
         [Route("Pessoa/")]
         public ActionResult Index()
         {
-            var pessoa = DadosPessoa.Listar();
+            var pessoa = this.RepositorioPessoa.Listar();
             return View(pessoa);
         }
 
         // GET: Buscar
         [Route("Pessoa/Buscar")]
         public ActionResult Buscar() {
-            var pessoa = DadosPessoa.pessoas.Where(pessoa => pessoa.Nome.Contains(HttpContext.Request.Form["Nome"],StringComparison.InvariantCultureIgnoreCase) || pessoa.SobreNome.Contains(HttpContext.Request.Form["Nome"], StringComparison.InvariantCultureIgnoreCase));
+            var pessoa = RepositorioPessoa.Listar().Where(pessoa => pessoa.Nome.Contains(HttpContext.Request.Form["Nome"],StringComparison.InvariantCultureIgnoreCase) 
+            || pessoa.SobreNome.Contains(HttpContext.Request.Form["Nome"], StringComparison.InvariantCultureIgnoreCase));
             return View(pessoa);
         }
 
@@ -31,12 +36,9 @@ namespace TP3_ASPNet.Controllers
         [Route("Pessoa/DetalhesPessoa/{id}")]
         public ActionResult DetalhesPessoa(int id)
         {
-            foreach (var pessoa in DadosPessoa.pessoas) {
-                if (pessoa.Id == id) {
-                    return View(pessoa);
-                }
-            }
-            return View();
+            var pessoa = this.RepositorioPessoa.GetById(id);
+            return View(pessoa);
+
         }
 
         // GET: Pessoa/Criar
@@ -54,7 +56,9 @@ namespace TP3_ASPNet.Controllers
         {
             try
             {
-                DadosPessoa.pessoas.Add(pessoa);
+                if (ModelState.IsValid == false)
+                    return View();
+                RepositorioPessoa.Salvar(pessoa);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -67,29 +71,28 @@ namespace TP3_ASPNet.Controllers
         [Route("Pessoa/Editar/{id}")]
         public ActionResult Editar(int id)
         {
-            foreach (var pessoa in DadosPessoa.pessoas) {
-                if (pessoa.Id == id) {
-                    return View(pessoa);
-                }
-            }
-            return View();
+            
+            var pessoa = this.RepositorioPessoa.GetById(id);
+            
+            return View(pessoa);
         }
 
         // POST: Pessoa/Edit/5
         [Route("Pessoa/Editar/{id}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(int id, PessoaModel pessoa)
-        {
+        public ActionResult Editar(int id, PessoaModel pessoa){
             try
             {
-                foreach (var objeto in DadosPessoa.pessoas) {
-                    if (objeto.Id == id) {
-                        objeto.Nome = HttpContext.Request.Form["Nome"];
-                        objeto.SobreNome = HttpContext.Request.Form["Sobrenome"];
-                        objeto.birth = DateTime.Parse(HttpContext.Request.Form["Nome"]);
-                    }
-                }
+                if (ModelState.IsValid == false)
+                    return View();
+                var pessoaEdit = this.RepositorioPessoa.GetById(id);
+
+                pessoaEdit.Nome = pessoa.Nome;
+                pessoaEdit.SobreNome = pessoa.SobreNome;
+                pessoaEdit.birth = pessoa.birth;
+                
+                RepositorioPessoa.Editar(pessoaEdit);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -103,24 +106,22 @@ namespace TP3_ASPNet.Controllers
         [Route("Pessoa/Deletar/{id}")]
         public ActionResult Deletar(int id)
         {
-            foreach (var pessoa in DadosPessoa.pessoas) {
-                if (pessoa.Id == id) {
+            var pessoa = this.RepositorioPessoa.GetById(id);
                     return View(pessoa);
-                }
-            }
-            return View();
         }
 
         // POST: Pessoa/Delete/5
         [Route("Pessoa/Deletar/{id}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Deletar(int id, PessoaModel pessoa)
+        public ActionResult Deletar(PessoaModel pessoa)
         {
             try
             {
+                if (ModelState.IsValid == false)
+                    return View();
 
-                DadosPessoa.pessoas.RemoveAll(x => x.Id == pessoa.Id);
+                RepositorioPessoa.Deletar(pessoa);
                 return RedirectToAction(nameof(Index));
             }
             catch

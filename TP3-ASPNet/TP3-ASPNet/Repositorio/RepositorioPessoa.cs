@@ -22,11 +22,10 @@ namespace TP3_ASPNet.Repositorio {
                     connection.Open();
 
                 SqlCommand sqlCommand = connection.CreateCommand();
-                sqlCommand.CommandText = "INSERT INTO ANIVERSARIANTE(Id, Nome, SobreNome, Birth) VALUES (@P1, @P2, @P3, @P4)";
-                sqlCommand.Parameters.AddWithValue("P1", pessoa.Id);
-                sqlCommand.Parameters.AddWithValue("P2", pessoa.Nome);
-                sqlCommand.Parameters.AddWithValue("P3", pessoa.SobreNome);
-                sqlCommand.Parameters.AddWithValue("P4", pessoa.birth);
+                sqlCommand.CommandText = "INSERT INTO ANIVERSARIANTE(Nome, SobreNome, Birth) VALUES (@P1, @P2, @P3)";
+                sqlCommand.Parameters.AddWithValue("P1", pessoa.Nome);
+                sqlCommand.Parameters.AddWithValue("P2", pessoa.SobreNome);
+                sqlCommand.Parameters.AddWithValue("P3", pessoa.birth);
 
                 sqlCommand.ExecuteNonQuery();
 
@@ -39,7 +38,7 @@ namespace TP3_ASPNet.Repositorio {
 
                 var sql = @"UPDATE ANIVERSARIANTE
                                  SET Nome = @P2,
-                                 SobreNome = @P3           
+                                 SobreNome = @P3,      
                                  Birth = @P4
                                  WHERE Id = @P1";
 
@@ -95,7 +94,7 @@ namespace TP3_ASPNet.Repositorio {
 
                 while (reader.Read()) {
                     PessoaModel pessoa = new PessoaModel() {
-                        Id = Convert.ToInt32(reader["Id"]),
+                        Id = int.Parse(reader["Id"].ToString()),
                         Nome = reader["Nome"].ToString(),
                         SobreNome = reader["SobreNome"].ToString(),
                         birth = Convert.ToDateTime(reader["Birth"])
@@ -107,7 +106,7 @@ namespace TP3_ASPNet.Repositorio {
             return result;
         }
 
-        public List<PessoaModel> GetById(int id) {
+        public PessoaModel GetById(int id) {
 
             List<PessoaModel> result = new List<PessoaModel>();
             using (var connection = new SqlConnection(this.ConnectionString)) {
@@ -134,7 +133,7 @@ namespace TP3_ASPNet.Repositorio {
                 }
                 connection.Close();
             }
-            return result;
+            return result.FirstOrDefault();
         }
 
     }
