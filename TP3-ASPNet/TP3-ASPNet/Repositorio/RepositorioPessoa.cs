@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -33,8 +34,8 @@ namespace TP3_ASPNet.Repositorio {
             }
         }
 
-            public void Editar(PessoaModel pessoa) {
-                using (var connection = new SqlConnection(this.ConnectionString)) {
+        public void Editar(PessoaModel pessoa) {
+            using (var connection = new SqlConnection(this.ConnectionString)) {
 
                 var sql = @"UPDATE ANIVERSARIANTE
                                  SET Nome = @P2,
@@ -42,20 +43,99 @@ namespace TP3_ASPNet.Repositorio {
                                  Birth = @P4
                                  WHERE Id = @P1";
 
-                    if (connection.State != System.Data.ConnectionState.Open)
-                        connection.Open();
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
 
-                    SqlCommand sqlCommand = connection.CreateCommand();
-                    sqlCommand.CommandText = sql;
-                    sqlCommand.Parameters.AddWithValue("P1", pessoa.Id);
-                    sqlCommand.Parameters.AddWithValue("P2", pessoa.Nome);
-                    sqlCommand.Parameters.AddWithValue("P3", pessoa.SobreNome);
-                    sqlCommand.Parameters.AddWithValue("P4", pessoa.birth);
+                SqlCommand sqlCommand = connection.CreateCommand();
+                sqlCommand.CommandText = sql;
+                sqlCommand.Parameters.AddWithValue("P1", pessoa.Id);
+                sqlCommand.Parameters.AddWithValue("P2", pessoa.Nome);
+                sqlCommand.Parameters.AddWithValue("P3", pessoa.SobreNome);
+                sqlCommand.Parameters.AddWithValue("P4", pessoa.birth);
 
-                    sqlCommand.ExecuteNonQuery();
+                sqlCommand.ExecuteNonQuery();
 
-                    connection.Close();
-                }
+                connection.Close();
             }
+        }
+
+        public void Deletar(PessoaModel pessoa) {
+            using (var connection = new SqlConnection(this.ConnectionString)) {
+
+                var sql = @"DELETE FROM ANIVERSARIANTE
+                                 WHERE Id = @P1";
+
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                SqlCommand sqlCommand = connection.CreateCommand();
+                sqlCommand.CommandText = sql;
+                sqlCommand.Parameters.AddWithValue("P1", pessoa.Id);
+
+                sqlCommand.ExecuteNonQuery();
+
+                connection.Close();
+            }
+        }
+
+        public List<PessoaModel> Listar() {
+
+            List<PessoaModel> result = new List<PessoaModel>();
+            using (var connection = new SqlConnection(this.ConnectionString)) {
+
+                var sql = @"SELECT Id, Nome, SobreNome, Birth FROM ANIVERSARIANTE";
+
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                SqlCommand sqlCommand = connection.CreateCommand();
+                sqlCommand.CommandText = sql;
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                while (reader.Read()) {
+                    PessoaModel pessoa = new PessoaModel() {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Nome = reader["Nome"].ToString(),
+                        SobreNome = reader["SobreNome"].ToString(),
+                        birth = Convert.ToDateTime(reader["Birth"])
+                    };
+                    result.Add(pessoa);
+                }
+                connection.Close();
+            }
+            return result;
+        }
+
+        public List<PessoaModel> GetById(int id) {
+
+            List<PessoaModel> result = new List<PessoaModel>();
+            using (var connection = new SqlConnection(this.ConnectionString)) {
+
+                var sql = @"SELECT Id, Nome, SobreNome, Birth FROM ANIVERSARIANTE WHERE Id = @P1";
+
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                SqlCommand sqlCommand = connection.CreateCommand();
+                sqlCommand.CommandText = sql;
+                sqlCommand.Parameters.AddWithValue("P1", id);
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                while (reader.Read()) {
+                    PessoaModel pessoa = new PessoaModel() {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Nome = reader["Nome"].ToString(),
+                        SobreNome = reader["SobreNome"].ToString(),
+                        birth = Convert.ToDateTime(reader["Birth"])
+                    };
+                    result.Add(pessoa);
+                }
+                connection.Close();
+            }
+            return result;
+        }
+
     }
 }
