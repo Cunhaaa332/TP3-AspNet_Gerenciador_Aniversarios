@@ -54,12 +54,6 @@ namespace TP3_ASPNet.Controllers
         {
             try
             {
-                if(DadosPessoa.pessoas.Count >= 1) {
-                    foreach (var objeto in DadosPessoa.pessoas) {
-                        PessoaModel ultimo = DadosPessoa.pessoas.Last(x => x.Id == objeto.Id);
-                        pessoa.Id = ultimo.Id + 1;
-                    }
-                }
                 DadosPessoa.pessoas.Add(pessoa);
                 return RedirectToAction(nameof(Index));
             }

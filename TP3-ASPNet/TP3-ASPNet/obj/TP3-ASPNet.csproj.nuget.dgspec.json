@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gabriel Cunha\\Desktop\\Programas c#\\TP3-ASPNet\\TP3-ASPNet\\TP3-ASPNet.csproj": {}
+    "C:\\Users\\Gabriel Cunha\\Desktop\\Programas c#\\TP3 Gabriel Cunha - AspNet\\TP3-ASPNet\\TP3-ASPNet\\TP3-ASPNet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gabriel Cunha\\Desktop\\Programas c#\\TP3-ASPNet\\TP3-ASPNet\\TP3-ASPNet.csproj": {
+    "C:\\Users\\Gabriel Cunha\\Desktop\\Programas c#\\TP3 Gabriel Cunha - AspNet\\TP3-ASPNet\\TP3-ASPNet\\TP3-ASPNet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabriel Cunha\\Desktop\\Programas c#\\TP3-ASPNet\\TP3-ASPNet\\TP3-ASPNet.csproj",
+        "projectUniqueName": "C:\\Users\\Gabriel Cunha\\Desktop\\Programas c#\\TP3 Gabriel Cunha - AspNet\\TP3-ASPNet\\TP3-ASPNet\\TP3-ASPNet.csproj",
         "projectName": "TP3-ASPNet",
-        "projectPath": "C:\\Users\\Gabriel Cunha\\Desktop\\Programas c#\\TP3-ASPNet\\TP3-ASPNet\\TP3-ASPNet.csproj",
+        "projectPath": "C:\\Users\\Gabriel Cunha\\Desktop\\Programas c#\\TP3 Gabriel Cunha - AspNet\\TP3-ASPNet\\TP3-ASPNet\\TP3-ASPNet.csproj",
         "packagesPath": "C:\\Users\\Gabriel Cunha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabriel Cunha\\Desktop\\Programas c#\\TP3-ASPNet\\TP3-ASPNet\\obj\\",
+        "outputPath": "C:\\Users\\Gabriel Cunha\\Desktop\\Programas c#\\TP3 Gabriel Cunha - AspNet\\TP3-ASPNet\\TP3-ASPNet\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -45,6 +45,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.3, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.1, )"
             }
           },
           "imports": [
