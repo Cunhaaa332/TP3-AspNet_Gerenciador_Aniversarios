@@ -20,8 +20,22 @@ namespace TP3_ASPNet.Controllers
         [Route("Pessoa/")]
         public ActionResult Index()
         {
-            var pessoa = this.RepositorioPessoa.Listar();
-            return View(pessoa);
+            var pessoas = this.RepositorioPessoa.Listar();
+            return View(pessoas);
+        }
+
+        [Route("Pessoa/AniversariantesDia")]
+        public ActionResult AniversariantesDia() {
+            DateTime hj = DateTime.Today;
+            var pessoas = this.RepositorioPessoa.Listar();
+            var aniversariantes = new List<PessoaModel>();
+
+            foreach (var pessoa in pessoas) {
+                if (pessoa.birth.Day == hj.Day && pessoa.birth.Month == hj.Month) {
+                    aniversariantes.Add(pessoa);
+                }
+            }
+            return View(aniversariantes);
         }
 
         // GET: Buscar
