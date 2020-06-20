@@ -81,7 +81,6 @@ namespace TP3_ASPNet.Repositorio {
 
             List<PessoaModel> result = new List<PessoaModel>();
             using (var connection = new SqlConnection(this.ConnectionString)) {
-
                 var sql = @"SELECT Id, Nome, SobreNome, Birth FROM ANIVERSARIANTE";
 
                 if (connection.State != System.Data.ConnectionState.Open)
@@ -101,9 +100,12 @@ namespace TP3_ASPNet.Repositorio {
                     };
                     result.Add(pessoa);
                 }
+                foreach(var pessoa in result) {
+                    pessoa.DiasRestantes = pessoa.QntosDiasFaltam();
+                }
                 connection.Close();
             }
-            return result;
+            return result.OrderBy(pessoa => pessoa.DiasRestantes).ToList();
         }
 
         public PessoaModel GetById(int id) {

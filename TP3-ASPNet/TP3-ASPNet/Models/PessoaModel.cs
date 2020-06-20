@@ -11,6 +11,7 @@ namespace TP3_ASPNet.Models {
         public string Nome { get; set; }
         public string SobreNome { get; set; }
         public DateTime birth { get; set; }
+        public int DiasRestantes { get; set; }
 
         public PessoaModel() {
         }
@@ -19,6 +20,18 @@ namespace TP3_ASPNet.Models {
             Nome = nome;
             SobreNome = sobrenome;
             birth = data;
+        }
+
+        public int QntosDiasFaltam() {
+            DateTime today = DateTime.Today;
+            DateTime niver = new DateTime(today.Year, birth.Month, birth.Day);
+
+            if (niver < today) {
+                niver = niver.AddYears(1);
+            }
+
+            int diasRestantes = (niver - today).Days;
+            return diasRestantes;
         }
 
         public override string ToString() {

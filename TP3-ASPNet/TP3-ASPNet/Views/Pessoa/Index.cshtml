@@ -30,6 +30,9 @@
             <th>
                 Data de Nascimento
             </th>
+            <th>
+                Dias Restantes
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -44,6 +47,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.birth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiasRestantes)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
