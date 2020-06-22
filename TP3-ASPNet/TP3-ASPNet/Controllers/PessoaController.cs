@@ -40,9 +40,8 @@ namespace TP3_ASPNet.Controllers
 
         // GET: Buscar
         [Route("Pessoa/Buscar")]
-        public ActionResult Buscar() {
-            var pessoa = RepositorioPessoa.Listar().Where(pessoa => pessoa.Nome.Contains(HttpContext.Request.Form["Nome"],StringComparison.InvariantCultureIgnoreCase) 
-            || pessoa.SobreNome.Contains(HttpContext.Request.Form["Nome"], StringComparison.InvariantCultureIgnoreCase));
+        public ActionResult Buscar(String nome) {
+            var pessoa = this.RepositorioPessoa.GetByName(nome);
             return View(pessoa);
         }
 

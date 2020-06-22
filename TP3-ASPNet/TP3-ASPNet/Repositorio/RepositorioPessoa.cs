@@ -138,6 +138,41 @@ namespace TP3_ASPNet.Repositorio {
             return result.FirstOrDefault();
         }
 
+        public List<PessoaModel> GetByName(string nome) {
+            List<PessoaModel> result = new List<PessoaModel>();
+
+            using (var connection = new SqlConnection(this.ConnectionString)) {
+
+                var sql = @" SELECT Id, Nome, SobreNome, Birth FROM Aniversariante
+                             WHERE Nome LIKE '%' + @P1 + '%' COLLATE SQL_Latin1_General_CP1_CI_AI OR SobreNome LIKE '%' + @P1 + '%' COLLATE SQL_Latin1_General_CP1_CI_AI
+                ";
+
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                SqlCommand sqlCommand = connection.CreateCommand();
+                sqlCommand.CommandText = sql;
+                sqlCommand.Parameters.AddWithValue("P1", nome);
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                while (reader.Read()) {
+                    PessoaModel pessoa = new PessoaModel() {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Nome = reader["Nome"].ToString(),
+                        SobreNome = reader["SobreNome"].ToString(),
+                        birth = Convert.ToDateTime(reader["Birth"])
+                    };
+
+                    result.Add(pessoa);
+                }
+
+                connection.Close();
+            }
+
+            return result;
+        }
+
 
     }
 }
